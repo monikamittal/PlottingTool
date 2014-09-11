@@ -1,0 +1,29 @@
+Histname DYee 
+XRange 60.0 120.0
+YRange 0.0 140000
+Xaxis Mass
+Yaxis Fake Rate
+Rebin 1
+PlotName DYee
+endofhisto
+
+Histname DYtt
+XRange 60.0 120.0
+YRange 0.0 140000
+Xaxis Mass
+Yaxis Fake Rate
+Rebin 1
+PlotName DYtt
+endofhisto
+
+
+
+Histname QCD
+XRange 60.0 120.0
+YRange 0.0 140000
+Xaxis Mass
+Yaxis # of events
+Rebin 1
+PlotName QCD
+endofhisto
+

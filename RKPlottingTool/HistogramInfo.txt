@@ -1,0 +1,12 @@
+Histname MuonIso_
+XRange 0. 5.
+YRange 0.0 1
+Xaxis I_{PF}^{relative combined}(#mu)
+Yaxis # of events (normalized to 1)
+Rebin 4
+PlotName MuonIso_
+legendplace 0.72 0.72 0.89 0.89
+legend 
+color 
+endofhisto
+

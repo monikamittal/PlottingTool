@@ -1,0 +1,13 @@
+option stack
+nhist 1
+nfile 3
+files RootFiles/2l2tauRecoRootFiles/HZZ200.root RootFiles/2l2tauRecoRootFiles/QCD.root Data.root
+normalizedUnity 1
+dirnameinrootfile 
+rootfileprefix Reco_
+legend H#rightarrowZZ; QCD; Data
+color 2 3 4
+lumi 
+xsection 
+totaleventhist 
+endoffile

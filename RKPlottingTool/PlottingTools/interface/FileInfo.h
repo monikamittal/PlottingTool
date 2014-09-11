@@ -1,0 +1,30 @@
+#ifndef FileInfo_H
+#define FileInfo_H
+
+#include <iostream>
+#include "CommonFilesToInclude.h"
+
+class FileInfo {
+ public :
+  FileInfo(){
+    filename.clear();
+    legend.clear();
+    color.clear();
+    xsection.clear();
+  }
+  std::vector<std::string> filename;
+  std::vector<std::string> legend;
+  std::vector<int> color;
+  std::vector<double> xsection;
+  int normalizeUnity;
+  std::string option;
+  std::string dirname;
+  std::string prefixname;
+  int nhist;
+  int nfile;
+  double lumi;
+  TH1F* totalevent;
+  ~FileInfo(){};
+  
+};
+#endif 

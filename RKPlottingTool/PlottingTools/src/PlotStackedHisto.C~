@@ -1,0 +1,159 @@
+#include "TROOT.h"
+#include <cstdlib>
+#include <iostream>
+#include <string>
+#include <stdio.h>
+#include <fstream>
+#include "TMath.h"
+#include <vector>
+#include "TH1F.h"
+#include "TRandom.h"
+#include "TFile.h"
+#include "TString.h"
+#include <sstream>
+#include "TLegend.h"
+#include "TStyle.h"
+#include "THStack.h"
+#include <algorithm>
+#include "../interface/PlotStackedHisto.h"
+#include"../interface/CreateCanvas.h"
+
+
+void PlotStackedHisto:: DrawHistograms(std::vector<FileInfo> fobjVec, std::vector<HistoInfo> hobjVec){
+  CreateCanvas CC;
+  TLegend* leg;
+  double setmaximum_ = 0.;
+  gStyle->SetOptStat(0);
+  gStyle->SetOptTitle(0);
+  gStyle->SetFrameLineWidth(3);
+
+  THStack* hstack = new THStack("generalised_stack","");
+  
+  TCanvas* c = CC.declareCanvasFor1Plot();
+  std::cout<<" Plot Stack  ---- finfiVec size ---"<<fobjVec.size()<<std::endl;
+  
+  // fonjVec.size gives the number of block in the text file
+  for(int ifilevec = 0; ifilevec < (int) fobjVec.size(); ifilevec++){
+    const int NFILES = fobjVec[ifilevec].filename.size();
+    TFile* f[NFILES];
+    TH1F* h ;
+
+    // how many plots to be made (how many blocks)
+    for(int ihisto =0; ihisto < (int) hobjVec.size(); ihisto++){
+      const int NHISTO = hobjVec[ihisto].histname.size();
+      double x1 = hobjVec[ihisto].legpos[0];
+      double y1 = hobjVec[ihisto].legpos[1];
+      double x2 = hobjVec[ihisto].legpos[2];
+      double y2 = hobjVec[ihisto].legpos[3];
+      
+      std::cout<< " legend position = "<<x1 
+	       <<"  "<<y1
+	       <<"  "<<x2
+	       <<"  "<<y2
+	       <<std::endl;
+      
+      leg = new TLegend(x1,y1,x2,y2,NULL,"brNDC");
+      leg->SetBorderSize(0);
+      leg->SetLineColor(1);
+      leg->SetLineStyle(1);
+      leg->SetLineWidth(1);
+      leg->SetFillColor(0);
+      leg->SetFillStyle(0);
+      leg->SetTextFont(22);
+
+      for (int ifile=0; ifile < NFILES; ifile++) {
+	f[ifile]  = (TFile*)gROOT->GetListOfFiles()->FindObject(fobjVec[ifilevec].filename[ifile].c_str());
+	if (!f[ifile])
+	  f[ifile]  = new TFile(fobjVec[ifilevec].filename[ifile].c_str());
+	f[ifile]->cd();
+	std::cout<<" filename = "<<fobjVec[ifilevec].filename[ifile].c_str()<<std::endl;
+	std::cout<<" dirname = "<<fobjVec[ifilevec].dirname.c_str()<<std::endl;
+	
+	// This is useful when all histograms are in same rootfile
+	for (int IHISTO=0; IHISTO < NHISTO; IHISTO++) {
+	  TString dir = fobjVec[ifilevec].dirname.c_str();
+	  std::cout<<" size = "<<dir.Sizeof()<<std::endl;
+	  TString histo;
+	  // check if input histo is in a directory
+	  if(dir.Sizeof()==1)
+	    histo = hobjVec[ihisto].histname[IHISTO].c_str();
+	  if(dir.Sizeof()>1)
+	    histo = dir+"/"+hobjVec[ihisto].histname[IHISTO].c_str();
+	  
+	  h = (TH1F*) f[ifile]->Get(histo);
+	  h->GetXaxis()->SetRangeUser(hobjVec[ihisto].XRange[0], hobjVec[ihisto].XRange[1]);
+	  double integral = h->Integral();
+	  //double scaleFactor = xsection * lumi / totaleventhist ;
+	  double scaleFactor = 1.0;
+	  h->Scale(scaleFactor);
+	  h->SetLineColor(kBlack);
+	  h->SetFillColor(fobjVec[ifilevec].color[ifile]);
+
+	  if(NFILES>1) h->SetLineColor(fobjVec[ifilevec].color[ifile]); // if more than 1 input file
+	  if(NHISTO>1) h->SetLineColor(hobjVec[ihisto].color[IHISTO]);  // if 1 file but multiple histograms
+	  
+	  
+	  if(ifile!=NHISTO-1) {
+	    hstack->Add(h);
+	    hstack->Draw();
+	  }
+	  else{
+	    h->Draw("PSAME,E1");
+	    h->SetMarkerColor(1);
+	    h->SetMarkerStyle(20);
+	    h->SetMarkerSize(1.2);
+	  }
+	  
+	  
+	  //std::cout<<" int = "<<h->Integral()<<std::endl;
+	  TString legendtext ;
+	  if(NFILES>1) legendtext = fobjVec[ifilevec].legend[ifile].c_str() ;
+	  if(NHISTO>1) { 
+	    legendtext = hobjVec[ihisto].legend[IHISTO].c_str() ;
+	    //std::cout<<" legend = "<<hobjVec[ihisto].legend[IHISTO].c_str() <<std::endl;
+	  }
+	  leg->AddEntry(h,legendtext,"L");
+	  
+	}//for (int IHISTO=0; IHISTO < NHISTO; IHISTO++) {
+	}//for (int ifile=0; ifile < NFILES; ifile++) {
+      
+      std::cout<<" added to stack "<<std::endl;
+	  hstack->GetXaxis()->SetLabelFont(22);
+	  hstack->GetYaxis()->SetLabelFont(22);
+	  TString xaxis = hobjVec[ihisto].XAXISTitle.c_str();
+	  hstack->GetXaxis()->SetTitle(hobjVec[ihisto].XAXISTitle.c_str());
+	  hstack->GetYaxis()->SetTitle(hobjVec[ihisto].YAXISTitle.c_str());
+	  hstack->GetXaxis()->SetTitleFont(22);
+	  hstack->GetYaxis()->SetTitleFont(22);
+	  hstack->GetXaxis()->SetTitleSize(0.045);
+          hstack->GetYaxis()->SetTitleSize(0.045);
+	  hstack->GetXaxis()->SetLabelSize(0.045);
+          hstack->GetYaxis()->SetLabelSize(0.045);
+	  
+	  hstack->GetYaxis()->SetTitleOffset(1.45);
+	  std::cout<<" xmin, xmax "<<hobjVec[ihisto].XRange[0] <<"    "<<hobjVec[ihisto].XRange[1]<<std::endl;
+	  hstack->GetXaxis()->SetRangeUser(hobjVec[ihisto].XRange[0], hobjVec[ihisto].XRange[1]);
+
+      
+      leg->Draw();
+      
+      TPaveText *pt = new TPaveText(0.1577181,0.9,0.9580537,0.96,"brNDC");
+      pt->SetBorderSize(0);
+      pt->SetTextAlign(12);
+      pt->SetFillStyle(0);
+      pt->SetTextFont(22);
+      pt->SetTextSize(0.045);
+      TText *text = pt->AddText(0.01,0.5,"CMS Simulation");
+      //text = pt->AddText(0.3,0.6,"#sqrt{s} = 8 TeV, L = 19.8 fb^{-1}");
+      text = pt->AddText(0.4,0.5,"#sqrt{s} = 8 TeV");
+      pt->Draw();
+      
+      TString plotname = hobjVec[ihisto].plotname.c_str();
+      TString prefix = fobjVec[ifilevec].prefixname.c_str();
+      c->SaveAs("plots/"+prefix+plotname+".pdf");
+      c->SaveAs("plots/"+prefix+plotname+".root");
+      c->SaveAs("plots/"+prefix+plotname+".C");
+      c->SaveAs("plots/"+prefix+plotname+".png");
+    }//for(int ihisto =0; ihisto < (int) hobjVec.size(); ihisto++){
+  }//for(int ifilevec = 0; ifilevec < (int) fobjVec.size(); ifilevec++){
+}

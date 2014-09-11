@@ -1,0 +1,12 @@
+Histname genHMass_ genHMassReweighted_
+XRange 200. 1600.
+YRange 0.0 140000
+Xaxis m_{ZZ}(in GeV)
+Yaxis #frac{d#sigma}{dm_{ZZ}}
+Rebin 10
+PlotName genHMassComparison_900
+legendplace 0.75 0.75 0.9 0.85
+legend Powheg gg2VV
+color 1 2 
+endofhisto
+

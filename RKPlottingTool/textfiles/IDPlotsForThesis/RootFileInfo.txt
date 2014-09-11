@@ -1,0 +1,13 @@
+option overlap
+nhist 1
+nfile 2
+files RootFiles/2l2tauRecoRootFiles/HZZ200.root RootFiles/2l2tauRecoRootFiles/QCD.root
+normalizedUnity 1
+dirnameinrootfile 
+rootfileprefix Reco_
+legend H#rightarrowZZ QCD
+color 1 2
+lumi 
+xsection 
+totaleventhist 
+endoffile

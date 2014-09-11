@@ -1,0 +1,10 @@
+OBJ=CreateCanvas.o DrawGraph.o
+CFLAGS = -Wall -Wno-deprecated -I
+all: ramanproj
+ramanproj : $(OBJ)
+	g++ `root-config --cflags` CalculatePValue.C $(OBJ) -o ramanproj `root-config --libs`
+CreateCanvas.o : PlottingTools/src/CreateCanvas.C 
+	g++ `root-config --cflags` PlottingTools/src/CreateCanvas.C -c 
+
+DrawGraph.o : PlottingTools/src/DrawGraph.C
+	g++ `root-config --cflags` PlottingTools/src/DrawGraph.C -c 

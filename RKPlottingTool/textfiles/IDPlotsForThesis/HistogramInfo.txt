@@ -1,0 +1,204 @@
+Histname MuonIso_
+XRange 0. 5.
+YRange 0.0 1
+Xaxis I_{PF}^{relative combined}(#mu)
+Yaxis # of events (normalized to 1)
+Rebin 4
+PlotName MuonIso_
+legendplace 0.72 0.72 0.89 0.89
+legend 
+color 
+endofhisto
+
+Histname Muon_Significance3D_
+XRange 0. 10.
+YRange 0.0 1
+Xaxis SIP_{#mu}
+Yaxis # of events (normalized to 1)
+Rebin 1
+PlotName Muon_Significance3D_
+legendplace 0.72 0.72 0.89 0.89
+legend  
+color 
+endofhisto
+
+Histname Muon_NewVz_
+XRange -50. 50.
+YRange 0.0 1
+Xaxis #DeltaZ_{#mu}
+Yaxis # of events (normalized to 1)
+Rebin 1
+PlotName Muon_NewVz_
+legendplace 0.72 0.72 0.89 0.89
+legend
+color
+endofhisto
+
+
+Histname Muon_normChi2_
+XRange 0. 15.
+YRange 0.0 1
+Xaxis #chi^{2}_{#mu}
+Yaxis # of events (normalized to 1)
+Rebin 1
+PlotName Muon_normChi2_
+legendplace 0.72 0.72 0.89 0.89
+legend
+color
+endofhisto
+
+Histname Muon_validHits_
+XRange 0. 50.
+YRange 0.0 1
+Xaxis Hits_{#mu}^{valid}
+Yaxis # of events (normalized to 1)
+Rebin 1
+PlotName Muon_validHits_
+legendplace 0.72 0.72 0.89 0.89
+legend
+color
+endofhisto
+
+
+Histname Muon_tkHits_
+XRange 0. 50.
+YRange 0.0 1
+Xaxis Hits_{#mu}^{tracker}
+Yaxis # of events (normalized to 1)
+Rebin 1
+PlotName Muon_tkHits_
+legendplace 0.72 0.72 0.89 0.89
+legend
+color
+endofhisto
+
+
+Histname Muon_pixHits_
+XRange 0. 6.
+YRange 0.0 1
+Xaxis Hits_{#mu}^{pixel}
+Yaxis # of events (normalized to 1)
+Rebin 1
+PlotName Muon_pixHits_
+legendplace 0.72 0.72 0.89 0.89
+legend
+color
+endofhisto
+
+
+Histname Muon_numberOfMatches_
+XRange 0. 5.
+YRange 0.0 1
+Xaxis Matched_{#mu}
+Yaxis # of events (normalized to 1)
+Rebin 1
+PlotName Muon_numberOfMatches_
+legendplace 0.72 0.72 0.89 0.89
+legend
+color
+endofhisto
+
+
+Histname Electron_Iso_
+XRange 0. 5.
+YRange 0.0 1
+Xaxis I_{PF}^{relative combined}(e)
+Yaxis # of events (normalized to 1)
+Rebin 4
+PlotName Electron_Iso_
+legendplace 0.72 0.72 0.89 0.89
+legend
+color
+endofhisto
+
+
+
+Histname Electron_MVAID_new_
+XRange -1. 1.
+YRange 0.0 1
+Xaxis BDT
+Yaxis # of events (normalized to 1)
+Rebin 2
+PlotName Electron_MVAID_new_
+legendplace 0.72 0.72 0.89 0.89
+legend
+color
+endofhisto
+
+
+
+Histname Electron_HoE_
+XRange 0 0.15
+YRange 0.0 1
+Xaxis H/E
+Yaxis # of events (normalized to 1)
+Rebin 1
+PlotName Electron_HoE_
+legendplace 0.72 0.72 0.89 0.89
+legend
+color
+endofhisto
+
+
+
+Histname Electron_SigmaIetaIeta_
+XRange 0 0.2
+YRange 0.0 1
+Xaxis #sigma_{i#etai#eta}
+Yaxis # of events (normalized to 1)
+Rebin 1
+PlotName Electron_SigmaIetaIeta_
+legendplace 0.72 0.72 0.89 0.89
+legend
+color
+endofhisto
+
+Histname Electron_dEtaIn_
+XRange -0.2. 0.2
+YRange 0.0 1
+Xaxis #Delta#eta_{e}
+Yaxis # of events (normalized to 1)
+Rebin 1
+PlotName Electron_dEtaIn_
+legendplace 0.72 0.72 0.89 0.89
+legend
+color
+endofhisto
+
+
+Histname Electron_dPhiIn_
+XRange -0.3 0.3
+YRange 0.0 1
+Xaxis #Delta#phi_{e}
+Yaxis # of events (normalized to 1)
+Rebin 1
+PlotName Electron_dPhiIn_
+legendplace 0.72 0.72 0.89 0.89
+legend
+color
+endofhisto
+
+Histname Electron_missing_hits_
+XRange 0. 5.0
+YRange 0.0 1
+Xaxis Hits^{missing}_{e}
+Yaxis # of events (normalized to 1)
+Rebin 1
+PlotName Electron_missing_hits_
+legendplace 0.72 0.72 0.89 0.89
+legend
+color
+endofhisto
+
+Histname Electron_Significance3D_
+XRange 0. 10.0
+YRange 0.0 1
+Xaxis SIP_{e}
+Yaxis # of events (normalized to 1)
+Rebin 1
+PlotName Electron_Significance3D_
+legendplace 0.72 0.72 0.89 0.89
+legend
+color
+endofhisto
+

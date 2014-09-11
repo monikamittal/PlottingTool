@@ -1,0 +1,12 @@
+option overlap
+nhist 2
+nfile 1
+files singletmodelfiles/Merged_GluGluToHToZZTo4L_M-900_7TeV-powheg15-pythia6_CPrime_100.root
+dirnameinrootfile status
+legend 
+color 
+lumi 
+xsection 
+totaleventhist 
+endoffile
+
